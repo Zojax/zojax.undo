@@ -1,0 +1,77 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.undo">
+
+  <zojax:configlet
+     name="system.undo"
+     title="Undo"
+     schema=".interfaces.IUndo"
+     description="Undo for site."
+     permission="zojax.Configure">
+    <require
+       permission="zope.Public"
+       interface=".interfaces.IUndo" />
+  </zojax:configlet>
+
+  <!-- configlet views -->
+  <zojax:pagelet
+     name="index.html"
+     for=".interfaces.IUndo"
+     class="zojax.controlpanel.browser.wizard.ConfigletEditWizard"
+     permission="zojax.Configure" />
+
+  <zojax:pagelet
+     name="undo"
+     title="Undo content"
+     type="wizard.step"
+     for=".interfaces.IUndo
+    zojax.controlpanel.browser.interfaces.IConfigletEditWizard"
+     template="content.pt"
+     class=".content.PortalContent"
+     permission="zojax.Configure"
+     weight="999" />
+
+  <adapter
+     name="undo.contents"
+     provides="zope.contentprovider.interfaces.IContentProvider"
+     factory=".content.UndoContentsTable" />
+
+  <adapter
+     for=".interfaces.IUndo .content.UndoContentsTable"
+     factory=".content.UndoContentsDataset" />
+
+  <adapter
+     name="description"
+     factory=".content.DescriptionColumn" />
+
+  <adapter
+     name="author"
+     factory=".content.AuthorColumn" />
+
+  <adapter
+     name="date"
+     factory=".content.DateColumn" />
+
+  <adapter
+     name="request"
+     factory=".content.RequestColumn" />
+
+  <adapter
+     name="location"
+     factory=".content.LocationColumn" />
+
+  <adapter
+     name="id"
+     factory=".content.IdColumn" />
+
+  <adapter
+     name="size"
+     factory=".content.SizeColumn" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales"/>
+
+</configure>

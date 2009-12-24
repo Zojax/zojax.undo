@@ -1,0 +1,71 @@
+<h2 tal:content="view/title|view/content/__name__"></h2>
+<div class="z-page-description" tal:content="view/description"></div>
+
+<div class="z-table-container">
+  <table class="z-table">
+    <tbody>
+      <tr>
+	<th>Title</th>
+	<td><a tal:content="view/title"
+	       tal:attributes="href string:${view/content/@@absolute_url}/"/>
+	</td>
+      </tr>
+      <tr>
+	<th>Contet Type</th>
+	<td tal:define="data view/getContentType">
+	  <tal:block content="structure data/icon" />
+	  <tal:block content="data/title" />
+	</td>
+      </tr>
+      <tr>
+	<th>Location</th>
+	<td tal:define="data view/getLocation">
+	  <tal:block condition="data">
+	    <tal:block content="structure data/icon" />
+	    <a tal:attributes="href data/url; title data/description"
+	       tal:content="data/title">Title</a>
+	  </tal:block>
+	  <tal:block condition="not:data">---</tal:block>
+	</td>
+      </tr>
+      <tr>
+	<th>Author</th>
+	<td tal:define="data view/getAuthor">
+	  <a title="View profile"
+	     tal:content="data/title"
+	     tal:attributes="href data/profile"
+	     tal:condition="data"
+	     tal:omit-tag="not:data/profile"></a>
+	</td>
+      </tr>
+      <tr>
+	<th>Created</th>
+	<td tal:content="structure formatter:dateTime,medium:view/created">
+	</td>
+      </tr>
+      <tr>
+	<th>Modified</th>
+	<td tal:content="structure formatter:dateTime,medium:view/modified">
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+
+<h2>HTML title tag</h2>
+
+<div class="z-form-fieldset">
+  <br />
+  <tal:block content="view/pagetitle" />
+  <br /><br />
+</div>
+
+<div>
+  <h2>SEO html tags</h2>
+  <div class="z-form-description">
+    Edit form fields to change default undo html tags.
+  </div>
+  <tal:block content="structure view/@@pagelet/form.view" />
+  <input type="hidden" name="id" tal:attributes="value request/id" />
+</div>

@@ -1,0 +1,62 @@
+# #############################################################################
+#
+# Copyright (c) 2009 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Wed Apr  8 20:41:24 2009\n"
+"PO-Revision-Date: 2008-11-20 10:02+0100\n"
+"Last-Translator: F. Kooman <fkooman@tuxed.net>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/undo/configure.zcml:10
+msgid "SEO"
+msgstr ""
+
+#: src/zojax/undo/configure.zcml:10
+msgid "SEO tools for site."
+msgstr ""
+
+#: src/zojax/undo/interfaces.py:28
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: src/zojax/undo/interfaces.py:29
+#, fuzzy
+msgid "Enable SEO for this site."
+msgstr "Schakel Google Analytics in voor deze site."
+
+#: src/zojax/undo/interfaces.py:34 src/zojax/undo/interfaces.py:35
+#: src/zojax/undo/interfaces.py:43
+msgid "Robots"
+msgstr ""
+
+#: src/zojax/undo/interfaces.py:42
+msgid "Sitemap"
+msgstr ""
+
+#~ msgid "Google Analytics service for site."
+#~ msgstr "Google Analytics service voor website."
+
+#~ msgid "Google Analytics"
+#~ msgstr "Google Analytics"
+
+#~ msgid "Tracking code"
+#~ msgstr "Tracking code"
+
+#~ msgid "Check your google analytics account for tracking code."
+#~ msgstr "Controleer je Google Analytics account voor de tracking code."

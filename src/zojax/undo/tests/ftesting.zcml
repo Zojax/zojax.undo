@@ -1,0 +1,103 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zope">
+
+  <!-- This file is the equivalent of site.zcml and it is -->
+  <!-- used for functional testing setup -->
+
+  <include package="zojax.autoinclude" file="meta.zcml" />
+  <includeAllDependencies package="zojax.undo" extras="test" />
+
+  <includeOverrides package="zojax.undo.tests" file="overrides.zcml" />
+
+  <securityPolicy
+     component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+
+  <interface
+     name="DefaultSkin"
+     interface="zojax.undo.tests.tests.IDefaultSkin"
+     type="zope.publisher.interfaces.browser.IBrowserSkinType" />
+
+  <browser:defaultSkin name="DefaultSkin" />
+
+  <zojax:pagelet
+     name="test.html"
+     for="*"
+     template="test.pt"
+     permission="zope.Public" />
+
+  <!-- content types -->
+  <zojax:content
+     name="content1"
+     title="Content 1"
+     schema="zojax.undo.tests.tests.IContent"
+     class="zojax.undo.tests.tests.Content" />
+
+  <class class="zojax.undo.tests.tests.Content">
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <require
+       permission="zope.View"
+       set_schema="zojax.content.type.interfaces.IItem"
+       interface="zojax.content.type.interfaces.IItem" />
+  </class>
+
+  <zojax:content
+     name="content2"
+     title="Content 2"
+     schema="zojax.undo.tests.tests.IPortalContent"
+     class="zojax.undo.tests.tests.PortalContent"
+     type="zojax.content.type.interfaces.IPortalType" />
+
+  <class class="zojax.undo.tests.tests.PortalContent">
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <require
+       permission="zope.View"
+       set_schema="zojax.content.type.interfaces.IItem"
+       interface="zojax.content.type.interfaces.IItem" />
+  </class>
+
+  <!-- portal -->
+  <zojax:content
+     name="portal"
+     title="Portal"
+     schema="zope.app.folder.interfaces.IFolder"
+     class="zope.app.folder.folder.Folder"
+     type="zojax.content.type.interfaces.IPortalType" />
+
+  <!-- roles -->
+  <role id="zope.Anonymous" title="Everybody"
+        description="All users have this role implicitly" />
+  <role id="zope.Manager" title="Site Manager" />
+
+  <!-- Replace the following directive if you don't want public access -->
+  <grant permission="zope.View"
+         role="zope.Anonymous" />
+
+  <grant permission="zope.app.dublincore.view"
+         role="zope.Anonymous" />
+
+  <!-- Principals -->
+  <unauthenticatedPrincipal
+      id="zope.anybody"
+      title="Unauthenticated User" />
+
+  <!-- Principal that tests generally run as -->
+  <principal
+      id="zope.mgr"
+      title="Manager"
+      login="mgr"
+      password="mgrpw" />
+
+  <principal
+      id="zope.user"
+      title="User"
+      login="user"
+      password="userpw" />
+
+  <grant role="zope.Manager" principal="zope.mgr" />
+
+  <grantAll role="zope.Manager" />
+
+</configure>

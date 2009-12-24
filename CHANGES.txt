@@ -1,0 +1,34 @@
+=======
+CHANGES
+=======
+
+1.2.2 (Unreleased)
+------------------
+
+
+1.2.1 (2009-09-07)
+------------------
+
+- Added SEO html tags management in configlet
+
+
+1.2.0 (2009-08-12)
+------------------
+
+- Fixed edit undo form
+
+- Update test for chameleon enabled setup
+
+- Copyright changed to 'Zope Foundation and Contributors'
+
+
+1.1.0 (2009-05-13)
+------------------
+
+- Added html head tags customization for portal content
+
+
+1.0.0 (2009-04-08)
+------------------
+
+- Initial release

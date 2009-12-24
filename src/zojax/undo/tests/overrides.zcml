@@ -1,0 +1,12 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zope">
+
+  <zojax:layout
+     name="portal"
+     title="Test layout"
+     for="zope.app.component.interfaces.ISite"
+     template="layoutportal.pt" />
+
+</configure>

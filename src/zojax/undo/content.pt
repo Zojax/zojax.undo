@@ -1,0 +1,8 @@
+<h2>Undo content</h2>
+
+<div tal:content="structure provider:undo.contents"></div>
+
+<div>
+  <h2>Search parameters</h2>
+  <tal:block content="structure view/@@pagelet/form.view" />
+</div>

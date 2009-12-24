@@ -1,0 +1,50 @@
+===
+SEO
+===
+
+    >>> from zope import component, interface
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.app.testing.functional import getRootFolder
+    >>> from zope.app.intid import IntIds
+    >>> from zope.app.intid.interfaces import IIntIds
+    >>> from zojax.catalog.catalog import Catalog, ICatalog
+
+    >>> root = getRootFolder()
+    >>> setSite(root)
+    >>> sm = root.getSiteManager()
+
+Undo
+
+    >>> admin = Browser()
+    >>> admin.handleErrors = False
+    >>> admin.addHeader("Authorization", "Basic mgr:mgrpw")
+
+    >>> admin.open("http://localhost/settings/")
+    >>> admin.getLink('Undo').click()
+
+We create content
+-----------------
+
+    >>> from zope import interface, event
+    >>> from zope.lifecycleevent import ObjectModifiedEvent
+    >>> from zope.annotation.interfaces import IAttributeAnnotatable
+    >>> from zojax.content.type.interfaces import IContent, IContentType
+    >>> from zojax.undo.tests.tests import Content, PortalContent
+
+    >>> interface.alsoProvides(root, IContent, IAttributeAnnotatable)
+
+    >>> root['content'] = Content(title=u'Simple content')
+
+
+Undo configlet contents
+----------------------
+
+    >>> import transaction
+    >>> transaction.commit()
+
+    >>> admin.open("http://localhost/settings/")
+    >>> admin.getLink('Undo').click()
+    >>> admin.getLink('Undo content').click()
+
+    >>> setSite(None)

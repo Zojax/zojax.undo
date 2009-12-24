@@ -1,0 +1,11 @@
+<html>
+  <head>
+     <tal:block define="view nocall:layout/mainview; context nocall:layout/maincontext">
+        <tal:block content="structure pageelement:page.title" />
+        <tal:block content="structure pageelement:page.metatags" />
+     </tal:block>
+  </head>
+  <body>
+    <tal:block tal:content="structure view/render" />
+  </body>
+</html>
