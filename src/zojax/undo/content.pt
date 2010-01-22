@@ -1,5 +1,21 @@
 <h2>Undo content</h2>
 
+  <span tal:condition="request/showall| nothing">
+    <p>
+      <span i18n:translate="">You are looking at transactions
+      regardless of location.</span> <a href="?"
+      i18n:translate="">View only transactions in this location</a>.
+    </p>
+  </span>
+
+  <span tal:condition="not:request/showall | nothing">
+    <p>
+      <span i18n:translate="">You are looking only at transactions
+      from this location.</span> <a href="?showall=true"
+      i18n:translate="">View transactions regardless of location</a>.
+    </p>
+  </span>
+
 <div tal:content="structure provider:undo.contents"></div>
 
 <div>

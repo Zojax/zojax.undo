@@ -30,7 +30,18 @@
      for=".interfaces.IUndo
     zojax.controlpanel.browser.interfaces.IConfigletEditWizard"
      template="content.pt"
-     class=".content.PortalContent"
+     class=".content.UndoContent"
+     permission="zojax.Configure"
+     weight="999" />
+     
+  <zojax:pagelet
+     name="undo"
+     title="Undo"
+     type="wizard.step"
+     for="*
+          zojax.content.forms.interfaces.IEditContentWizard"
+     template="content.pt"
+     class=".content.UndoContent"
      permission="zojax.Configure"
      weight="999" />
 
@@ -40,9 +51,9 @@
      factory=".content.UndoContentsTable" />
 
   <adapter
-     for=".interfaces.IUndo .content.UndoContentsTable"
+     for="* .content.UndoContentsTable"
      factory=".content.UndoContentsDataset" />
-
+     
   <adapter
      name="description"
      factory=".content.DescriptionColumn" />

@@ -20,6 +20,8 @@ import sys
 import logging
 import pytz
 
+import transaction
+
 from zope import interface, schema, component
 from zope.location import Location
 from zope.component import getUtility, getMultiAdapter, queryMultiAdapter
@@ -29,6 +31,7 @@ from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 from zope.app.undo.browser import UndoView
 from zope.app.undo.interfaces import IUndoManager
+from zope.app.undo import ZODBUndoManager
 from zope.app.component.hooks import getSite
 from zope.datetime import parseDatetimetz
 
@@ -56,6 +59,13 @@ SESSIONKEY = u'zojax.undo'
 logger = logging.getLogger('zojax.undo')
 
 
+def _undo(self, ids):
+    self._ZODBUndoManager__db.undoMultiple(ids)
+    transaction.get().setExtendedInfo('undo', True)
+
+
+ZODBUndoManager._undo = _undo
+
 class ISearchForm(interface.Interface):
 
     searchableText = schema.TextLine(
@@ -63,7 +73,7 @@ class ISearchForm(interface.Interface):
         required = False)
 
 
-class PortalContent(WizardStepForm, UndoView):
+class UndoContent(WizardStepForm, UndoView):
 
     fields = Fields(ISearchForm)
 
@@ -95,33 +105,32 @@ class PortalContent(WizardStepForm, UndoView):
 
 
 class UndoContentsTable(Table):
-    component.adapts(IUndo, interface.Interface, interface.Interface)
+    component.adapts(interface.Interface, interface.Interface, interface.Interface)
 
     pageSize = 20
     enabledColumns = ('id', 'location', 'request', 'date', 'description', 'author', 'size')
     msgEmptyTable = _('No undo content.')
-    sessionBatch = True
+    sessionBatch = False
 
 
 class UndoContentsDataset(object):
 
     interface.implements(IDataset)
 
-    showall = True
-
     def __init__(self, context, table):
         self.context, self.table = context, table
+        self.showall =  bool(self.table.request.get('showall'))
 
     def __getslice__(self, i, j):
         """ data slice """
-        return self.table.view.getAllTransactions(0, -j, showall=self.showall)
+        return self.table.view.getAllTransactions(i, -(j-i), showall=self.showall)
 
     def __len__(self):
         return sys.maxint
 
 
 class DescriptionColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'description'
     title = _('Description')
@@ -132,7 +141,7 @@ class DescriptionColumn(Column):
 
 
 class SizeColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'size'
     title = _('Size')
@@ -143,7 +152,7 @@ class SizeColumn(Column):
 
 
 class LocationColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'location'
     title = _('Location')
@@ -159,7 +168,7 @@ class LocationColumn(Column):
 
 
 class LocationColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'location'
     title = _('Location')
@@ -175,7 +184,7 @@ class LocationColumn(Column):
 
 
 class RequestColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'request'
     title = _('Request')
@@ -187,7 +196,7 @@ class RequestColumn(Column):
 
 class AuthorColumn(AuthorColumn):
 
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     title = _('Author')
 
@@ -197,7 +206,7 @@ class AuthorColumn(AuthorColumn):
 
 class DateColumn(TimesColumn):
 
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     name = 'date'
     title = _('Date')
@@ -208,7 +217,7 @@ class DateColumn(TimesColumn):
 
 
 class IdColumn(Column):
-    component.adapts(IUndo, interface.Interface, UndoContentsTable)
+    component.adapts(interface.Interface, interface.Interface, UndoContentsTable)
 
     weight = 0
     name = 'id'
