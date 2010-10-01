@@ -32,7 +32,7 @@ from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 from zope.app.undo.browser import UndoView
 from zope.app.undo.interfaces import IUndoManager
-from zope.app.undo import ZODBUndoManager, undoSetup
+from zope.app.undo import ZODBUndoManager
 from zope.app.component.hooks import getSite
 from zope.datetime import parseDatetimetz
 
@@ -55,17 +55,11 @@ from zojax.principal.profile.interfaces import IPersonalProfile
 from zojax.statusmessage.interfaces import IStatusMessage
 
 from zojax.undo.interfaces import _, IUndo
+from zojax.undo import undoSetup
 
 SESSIONKEY = u'zojax.undo'
 logger = logging.getLogger('zojax.undo')
 
-
-def _undo(self, ids):
-    self._ZODBUndoManager__db.undoMultiple(ids)
-    transaction.get().setExtendedInfo('undo', True)
-
-
-ZODBUndoManager._undo = _undo
 
 class ISearchForm(interface.Interface):
 
@@ -125,9 +119,10 @@ class UndoContentsDataset(object):
     def __getslice__(self, i, j):
         """ data slice """
         class ev(object):
-            def __init__(self, database):
-                self.database = database
-        undoSetup(ev(self.table.request.publication.db))
+
+            def __init__(self, db):
+                self.database = db
+        undoSetup(ev(removeSecurityProxy(self.context)._p_jar._db))
         return self.table.view.getAllTransactions(i, -(j-i), showall=self.showall)
 
     def __len__(self):

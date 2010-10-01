@@ -5,6 +5,11 @@
    xmlns:browser="http://namespaces.zope.org/browser"
    i18n_domain="zojax.undo">
 
+  <subscriber
+      handler=".undoSetup"
+      for="zope.app.appsetup.IDatabaseOpenedEvent"
+      />
+
   <zojax:configlet
      name="system.undo"
      title="Undo"
@@ -33,7 +38,7 @@
      class=".content.UndoContent"
      permission="zojax.Configure"
      weight="999" />
-     
+
   <zojax:pagelet
      name="undo"
      title="Undo"
@@ -53,7 +58,7 @@
   <adapter
      for="* .content.UndoContentsTable"
      factory=".content.UndoContentsDataset" />
-     
+
   <adapter
      name="description"
      factory=".content.DescriptionColumn" />
