@@ -11,6 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from zope.security.proxy import removeSecurityProxy
 """
 
 $Id$
@@ -31,7 +32,7 @@ from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 from zope.app.undo.browser import UndoView
 from zope.app.undo.interfaces import IUndoManager
-from zope.app.undo import ZODBUndoManager
+from zope.app.undo import ZODBUndoManager, undoSetup
 from zope.app.component.hooks import getSite
 from zope.datetime import parseDatetimetz
 
@@ -123,6 +124,10 @@ class UndoContentsDataset(object):
 
     def __getslice__(self, i, j):
         """ data slice """
+        class ev(object):
+            def __init__(self, database):
+                self.database = database
+        undoSetup(ev(self.table.request.publication.db))
         return self.table.view.getAllTransactions(i, -(j-i), showall=self.showall)
 
     def __len__(self):
