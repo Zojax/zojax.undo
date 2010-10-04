@@ -73,7 +73,7 @@ class ZODBUndoManager(object):
             path = '/' # default for now
             specification.update({'user_name': path + ' ' + principal.id})
 
-        entries = self.__db.undoInfo(first, last, None)
+        entries = self.__db.undoInfo(first, last, specification)
 
         # We walk through the entries, augmenting the dictionaries
         # with some additional items we have promised in the interface
