@@ -32,7 +32,6 @@ from zope.traversing.browser import absoluteURL
 from zope.dublincore.interfaces import IDCTimes
 from zope.app.undo.browser import UndoView
 from zope.app.undo.interfaces import IUndoManager
-from zope.app.undo import ZODBUndoManager
 from zope.app.component.hooks import getSite
 from zope.datetime import parseDatetimetz
 
