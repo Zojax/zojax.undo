@@ -18,7 +18,7 @@ $Id$
 __docformat__ = 'restructuredtext'
 
 from datetime import datetime
-
+import operator
 import transaction
 import zope.component
 from zope.interface import implements
@@ -72,9 +72,19 @@ class ZODBUndoManager(object):
             # some point
             path = '/' # default for now
             specification.update({'user_name': path + ' ' + principal.id})
-
-        entries = self.__db.undoInfo(first, last, specification)
-
+        try:
+            def flt(info):
+                if not specification:
+                    return True
+                try:
+                    return bool(reduce(operator.and_, map(lambda (x,y): info.get(x) is not None and y== info.get(x) or False, specification.items())))
+                except TypeError:
+                    return False
+            entries = self.__db.undoLog(first, last, flt)
+        except:
+            import logging
+            logging.getLogger('zojax.undo').exception('error')
+            raise
         # We walk through the entries, augmenting the dictionaries
         # with some additional items we have promised in the interface
         for entry in entries:
