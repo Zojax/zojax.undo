@@ -5,20 +5,20 @@
   <table class="z-table">
     <tbody>
       <tr>
-	<th>Title</th>
+	<th i18n:translate="">Title</th>
 	<td><a tal:content="view/title"
 	       tal:attributes="href string:${view/content/@@absolute_url}/"/>
 	</td>
       </tr>
       <tr>
-	<th>Contet Type</th>
+	<th i18n:translate="">Contet Type</th>
 	<td tal:define="data view/getContentType">
 	  <tal:block content="structure data/icon" />
 	  <tal:block content="data/title" />
 	</td>
       </tr>
       <tr>
-	<th>Location</th>
+	<th i18n:translate="">Location</th>
 	<td tal:define="data view/getLocation">
 	  <tal:block condition="data">
 	    <tal:block content="structure data/icon" />
@@ -29,22 +29,23 @@
 	</td>
       </tr>
       <tr>
-	<th>Author</th>
+	<th i18n:translate="">Author</th>
 	<td tal:define="data view/getAuthor">
 	  <a title="View profile"
 	     tal:content="data/title"
+	     i18n:attributes="title"
 	     tal:attributes="href data/profile"
 	     tal:condition="data"
 	     tal:omit-tag="not:data/profile"></a>
 	</td>
       </tr>
       <tr>
-	<th>Created</th>
+	<th i18n:translate="">Created</th>
 	<td tal:content="structure formatter:dateTime,medium:view/created">
 	</td>
       </tr>
       <tr>
-	<th>Modified</th>
+	<th i18n:translate="">Modified</th>
 	<td tal:content="structure formatter:dateTime,medium:view/modified">
 	</td>
       </tr>
@@ -53,7 +54,7 @@
 </div>
 <br />
 
-<h2>HTML title tag</h2>
+<h2 i18n:translate="">HTML title tag</h2>
 
 <div class="z-form-fieldset">
   <br />
@@ -62,8 +63,8 @@
 </div>
 
 <div>
-  <h2>SEO html tags</h2>
-  <div class="z-form-description">
+  <h2 i18n:translate="">SEO html tags</h2>
+  <div class="z-form-description" i18n:translate="">
     Edit form fields to change default undo html tags.
   </div>
   <tal:block content="structure view/@@pagelet/form.view" />

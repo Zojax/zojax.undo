@@ -1,7 +1,7 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
    xmlns:zojax="http://namespaces.zope.org/zojax"
-   i18n_domain="zope">
+   i18n_domain="zojax.undo">
 
   <zojax:layout
      name="portal"

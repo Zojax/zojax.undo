@@ -1,4 +1,4 @@
-<h2>Undo content</h2>
+<h2 i18n:translate="">Undo content</h2>
 
   <span tal:condition="request/showall| nothing">
     <p>
@@ -19,6 +19,6 @@
 <div tal:content="structure provider:undo.contents"></div>
 
 <div>
-  <h2>Search parameters</h2>
+  <h2 i18n:translate="">Search parameters</h2>
   <tal:block content="structure view/@@pagelet/form.view" />
 </div>

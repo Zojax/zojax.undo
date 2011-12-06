@@ -2,7 +2,7 @@
    xmlns="http://namespaces.zope.org/zope"
    xmlns:browser="http://namespaces.zope.org/browser"
    xmlns:zojax="http://namespaces.zope.org/zojax"
-   i18n_domain="zope">
+   i18n_domain="zojax.undo">
 
   <!-- This file is the equivalent of site.zcml and it is -->
   <!-- used for functional testing setup -->
