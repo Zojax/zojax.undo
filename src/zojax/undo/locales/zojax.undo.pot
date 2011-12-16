@@ -1,0 +1,89 @@
+##############################################################################
+#
+# Copyright (c) 2003-2004 Zope Corporation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Thu Dec  8 22:17:56 2011\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/undo/configure.zcml:13
+msgid "Undo for site."
+msgstr ""
+
+#: src/zojax/undo/content.py:106
+msgid "No undo content."
+msgstr ""
+
+#: src/zojax/undo/content.py:135
+msgid "Description"
+msgstr ""
+
+#: src/zojax/undo/content.py:139
+msgid "[No description]"
+msgstr ""
+
+#: src/zojax/undo/content.py:146
+msgid "Size"
+msgstr ""
+
+#: src/zojax/undo/content.py:150
+msgid "[No size]"
+msgstr ""
+
+#: src/zojax/undo/content.py:157
+#: src/zojax/undo/content.py:173
+msgid "Location"
+msgstr ""
+
+#: src/zojax/undo/content.py:161
+#: src/zojax/undo/content.py:177
+#: src/zojax/undo/content.py:193
+msgid "[Unknown]"
+msgstr ""
+
+#: src/zojax/undo/content.py:189
+msgid "Request"
+msgstr ""
+
+#: src/zojax/undo/content.py:200
+msgid "Author"
+msgstr ""
+
+#: src/zojax/undo/content.py:211
+msgid "Date"
+msgstr ""
+
+#: src/zojax/undo/content.py:83
+#: src/zojax/undo/configure.zcml:13
+msgid "Undo"
+msgstr ""
+
+#: src/zojax/undo/content.py:90
+msgid "You must select transactions"
+msgstr ""
+
+#: src/zojax/undo/content.py:94
+msgid "Selected transactions has been undoed"
+msgstr ""
+
+#: src/zojax/undo/content.py:97
+msgid "Error upon undo: %s"
+msgstr ""
+
