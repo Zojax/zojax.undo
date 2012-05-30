@@ -39,7 +39,6 @@ Undo configlet contents
 
     >>> import transaction
     >>> transaction.commit()
-
     >>> admin.open("http://localhost/content/context.html/undo")
 
     >>> setSite(None)

@@ -73,14 +73,15 @@ class ZODBUndoManager(object):
             path = '/' # default for now
             specification.update({'user_name': path + ' ' + principal.id})
         try:
-            def flt(info):
-                if not specification:
-                    return True
-                try:
-                    return bool(reduce(operator.and_, map(lambda (x,y): info.get(x) is not None and y== info.get(x) or False, specification.items())))
-                except TypeError:
-                    return False
-            entries = self.__db.undoLog(first, last, flt)
+            if specification:
+                def flt(info):
+                    try:
+                        return bool(reduce(operator.and_, map(lambda (x,y): info.get(x) is not None and y== info.get(x) or False, specification.items())))
+                    except TypeError:
+                        return False
+            else:
+                flt = None
+            entries = self.__db.undoInfo(first, last, specification)
         except:
             import logging
             logging.getLogger('zojax.undo').exception('error')

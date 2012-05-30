@@ -121,7 +121,7 @@ class UndoContentsDataset(object):
 
             def __init__(self, db):
                 self.database = db
-        undoSetup(ev(removeSecurityProxy(self.context)._p_jar._db))
+        #undoSetup(ev(removeSecurityProxy(self.context)._p_jar._db))
         return self.table.view.getAllTransactions(i, -(j-i), showall=self.showall)
 
     def __len__(self):
